@@ -5,50 +5,53 @@ import './stylesheets/App.css';
 import Header from './components/Header'; 
 import LoadingScreen from './components/Loading';
 
-const ResultScreen = ({ result }: { result: string }) => (
+const ResultScreen = ({ totalFees }: { totalFees: string }) => (
   <div>
     <h2>API Result:</h2>
-    <p>{result}</p>
+    <p>Total Fees: {totalFees} lamports</p>
   </div>
 );
 
-const Home = ({ onSubmit }: { onSubmit: (input: string) => void }) => {
-  const [input, setInput] = useState('');
+const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState('');
+  const [totalFees, setTotalFees] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+const handleGetTotalFees = async (walletAddress: string) => {
+  setIsLoading(true);
 
-    try {
-      const response = await getTotalFeesPaid(input); 
-      setResult(JSON.stringify(response, null, 2)); 
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsLoading(false); 
-    }
-     
-  };
+  try {
+    const fees = await getTotalFeesPaid(walletAddress);
+    setTotalFees(fees); // Set the fees directly as a string
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   if (isLoading) {
     return <LoadingScreen />;
   }
 
-  if (result) {
-    return <ResultScreen result={result} />;
+  if (totalFees !== null) {
+    return <ResultScreen totalFees={totalFees} />;
   }
 
   return (
     <div className="container">
       <div className="form">
         <h2>Enter A Solana Address</h2>
-        <form onSubmit={handleSubmit}>
-          <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
+        <form onSubmit={(e) => { 
+          e.preventDefault();
+          const target = e.target as HTMLFormElement;
+          const walletAddress = target.elements.namedItem("walletAddress")?.value;
+          if (walletAddress) {
+            handleGetTotalFees(walletAddress);
+          }
+        }}>
+          <input type="text" name="walletAddress" />
           <div className="buttons">
             <button type="submit">Submit</button>
-            <button type="button" onClick={() => setInput('')}>Reset</button>
           </div>
         </form>
       </div>
@@ -66,7 +69,7 @@ const App = () => {
         <Route
           exact
           path="/"
-          render={() => <Home onSubmit={(input) => console.log('Input:', input)} />}
+          component={Home}
         />
         <Redirect to="/" />
       </Switch>
