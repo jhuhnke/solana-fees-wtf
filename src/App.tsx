@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { getFees } from "./queries/all-fees";
+import { getTotalFeesPaid } from "./queries/get-fees";
 import './stylesheets/App.css'; 
 import Header from './components/Header'; 
 import LoadingScreen from './components/Loading';
@@ -22,7 +22,7 @@ const Home = ({ onSubmit }: { onSubmit: (input: string) => void }) => {
     setIsLoading(true);
 
     try {
-      const response = await getFees(input); 
+      const response = await getTotalFeesPaid(input); 
       setResult(JSON.stringify(response, null, 2)); 
     } catch (error) {
       console.error('Error:', error);
