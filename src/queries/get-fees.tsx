@@ -22,14 +22,13 @@ export async function getTotalFeesPaid(walletAddress: string) {
         maxSupportedTransactionVersion: 0,// Set maxConfirmedBlocks instead of maxSupportedTransactionVersion
       });
 
-      if (transactionInfoResponse.meta && transactionInfoResponse.meta.fee) {
+      if (transactionInfoResponse && transactionInfoResponse.meta && transactionInfoResponse.meta.fee) {
         const fee = transactionInfoResponse.meta.fee;
         totalFees += fee;
 
         transactionCount++;
       }
     }
-
     return { totalFees, transactionCount };
   } catch (error) {
     console.error('Error:', error);

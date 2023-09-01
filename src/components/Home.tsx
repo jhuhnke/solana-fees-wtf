@@ -6,13 +6,15 @@ import ResultScreen from './ResultScreen';
 const Home = ({ onSubmit }: { onSubmit: (input: string) => void }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [totalFees, setTotalFees] = useState<number | null>(null);
+  const [transactionCount, setTransactionCount] = useState<number | null>(null);
 
   const handleGetTotalFees = async (walletAddress: string) => {
     setIsLoading(true);
 
     try {
-      const { totalFees } = await getTotalFeesPaid(walletAddress);
-      setTotalFees(totalFees); // Set the fees directly as a number
+      const { totalFees, transactionCount } = await getTotalFeesPaid(walletAddress);
+      setTotalFees(totalFees);
+      setTransactionCount(transactionCount); // Set the fees directly as a number
     } catch (error) {
       console.error('Error:', error);
     } finally {
@@ -25,7 +27,7 @@ const Home = ({ onSubmit }: { onSubmit: (input: string) => void }) => {
   }
 
   if (totalFees !== null) {
-    return <ResultScreen totalFees={totalFees} />;
+    return <ResultScreen totalFees={totalFees} transactionCount = {transactionCount} />;
   }
 
   return (
@@ -36,7 +38,7 @@ const Home = ({ onSubmit }: { onSubmit: (input: string) => void }) => {
           onSubmit={(e) => {
             e.preventDefault();
             const target = e.target as HTMLFormElement;
-            const walletAddress = target.elements.namedItem("walletAddress")?.value;
+            const walletAddress = (target.elements.namedItem("walletAddress") as HTMLInputElement)?.value;
             if (walletAddress) {
               handleGetTotalFees(walletAddress);
             }
