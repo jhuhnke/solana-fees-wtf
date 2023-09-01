@@ -6,37 +6,33 @@ const rpcEndpoint = 'https://rpc.helius.xyz/?api-key=2cc4df26-0576-4fb8-ac07-09b
 export async function getTotalFeesPaid(walletAddress: string) {
   const connection = new Connection(rpcEndpoint, 'confirmed');
 
+  
   try {
     const publicKey = new PublicKey(walletAddress);
 
-    // Get confirmed signatures for the wallet address
     const signatures = await connection.getSignaturesForAddress(publicKey);
 
     let totalFees = 0;
     let transactionCount = 0;
 
-    // Iterate through signatures and fetch transaction info
     for (const signatureInfo of signatures) {
       const signature = signatureInfo.signature;
 
-      // Get transaction info using the signature
-      const transactionInfoResponse = await connection.getTransaction(signature);
+      const transactionInfoResponse = await connection.getTransaction(signature, {
+        maxSupportedTransactionVersion: 0,// Set maxConfirmedBlocks instead of maxSupportedTransactionVersion
+      });
 
-      if (transactionInfoResponse.result) {
-        // Calculate total fees
-        const fee = transactionInfoResponse.result.meta.fee;
+      if (transactionInfoResponse.meta && transactionInfoResponse.meta.fee) {
+        const fee = transactionInfoResponse.meta.fee;
         totalFees += fee;
 
-        // Increment transaction count
         transactionCount++;
       }
     }
 
-    return { totalFees, transactionCount }; // Return total fees and transaction count
+    return { totalFees, transactionCount };
   } catch (error) {
     console.error('Error:', error);
-    throw error; // Rethrow the error to handle it in the calling code
+    throw error;
   }
 }
-
-
