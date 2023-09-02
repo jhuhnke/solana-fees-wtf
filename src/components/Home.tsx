@@ -3,31 +3,33 @@ import { getTotalFeesPaid } from "../queries/get-fees";
 import LoadingScreen from './Loading';
 import ResultScreen from './ResultScreen';
 
-const Home = ({ onSubmit }: { onSubmit: (input: string) => void }) => {
+const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [totalFees, setTotalFees] = useState<number | null>(null);
   const [transactionCount, setTransactionCount] = useState<number | null>(null);
+  const [ethGasPrice, setEthGasPrice] = useState<number | null>(null);
 
   const handleGetTotalFees = async (walletAddress: string) => {
-    setIsLoading(true);
+  setIsLoading(true);
 
-    try {
-      const { totalFees, transactionCount } = await getTotalFeesPaid(walletAddress);
-      setTotalFees(totalFees);
-      setTransactionCount(transactionCount); // Set the fees directly as a number
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  try {
+    const { totalFees, transactionCount, ethGasPrice } = await getTotalFeesPaid(walletAddress);
+    setTotalFees(totalFees);
+    setTransactionCount(transactionCount);
+    setEthGasPrice(ethGasPrice);
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   if (isLoading) {
     return <LoadingScreen />;
   }
 
   if (totalFees !== null) {
-    return <ResultScreen totalFees={totalFees} transactionCount = {transactionCount} />;
+    return <ResultScreen totalFees={totalFees} transactionCount = {transactionCount} ethGasPrice={ethGasPrice} />;
   }
 
   return (
