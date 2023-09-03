@@ -3,5 +3,11 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: #F3F3F3;
     /* Adjust this to the desired height */
+}
+
+.buttons {
+    margin-top: 1rem;
+    justify-content: center;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import '../stylesheets/ResultScreen.css'
 
 interface ResultScreenProps {
   totalFees: number | null;
@@ -102,7 +102,9 @@ useEffect(() => {
             ETH USD Gas paid - SOL USD Gas paid: ${gasDifference !== null ? gasDifference.toFixed(9) : 'N/A'}
           </p>
         )}
-        <button onClick={() => (window.location.href = '/')}>Reset</button>
+          <div className='buttons'>
+            <button onClick={() => (window.location.href = '/')}>Reset</button>
+          </div>
       </div>
     </div>
   );

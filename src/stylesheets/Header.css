@@ -3,7 +3,7 @@ header.header {
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  background-color: #f2f2f2;
+  background-color: #F3F3F3;
   height: 10vh;
 }
 
@@ -20,4 +20,15 @@ header.header {
   margin: 0;
   font-size: 1.5rem;
   flex-grow: 1;
+  text-align: center;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-icons a {
+  color: black;
 }

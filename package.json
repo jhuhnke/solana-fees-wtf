@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "@flipsidecrypto/sdk": "^2.0.0",
+    "@fortawesome/fontawesome-free": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@solana/web3.js": "^1.78.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
