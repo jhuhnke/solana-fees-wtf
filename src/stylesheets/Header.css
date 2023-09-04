@@ -1,14 +1,19 @@
 header.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 98%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 1rem;
-  background-color: #F3F3F3;
+  background-color: transparent;
   height: 10vh;
+  z-index: 1;
 }
 
 .logo {
   height: 100%;
+  margin-right: 2%;
 }
 
 .logo img {
@@ -24,11 +29,15 @@ header.header {
 }
 
 .social-icons {
-  display: flex;
-  align-items: center;
+  margin-left: 2%;
   gap: 10px;
 }
 
 .social-icons a {
   color: black;
+  text-decoration: none; 
+}
+
+.social-icons a:hover {
+  color: #666;
 }

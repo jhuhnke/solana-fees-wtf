@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { getTotalFeesPaid } from "../queries/get-fees";
 import LoadingScreen from './Loading';
 import ResultScreen from './ResultScreen';
+//import '../stylesheets/Home.css'
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
