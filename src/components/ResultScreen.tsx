@@ -6,12 +6,14 @@ interface ResultScreenProps {
   totalFees: number | null;
   transactionCount: number | null;
   ethGasPrice: number | null;
+  walletAddress: string;
 }
 
 const ResultScreen: React.FC<ResultScreenProps> = ({
   totalFees,
   transactionCount,
   ethGasPrice,
+  walletAddress,
 }) => {
   const [solanaPrice, setSolanaPrice] = useState<number | null>(null);
   const [ethPrice, setEthPrice] = useState<number | null>(null);
@@ -71,14 +73,15 @@ useEffect(() => {
 
 
   return (
-    <div className="center">
+    <div className = 'container'>
+      <div className="center">
       <div>
         <p>
-          Total fees paid: {totalFees !== null ? totalFees / 10 ** 9 : 'N/A'} SOL for a total of{' '}
+          <a href= {`https://solscan.io/account/${walletAddress}`} target="_blank" rel="noopener noreferrer"> {walletAddress}</a> has spent {totalFees !== null ? totalFees / 10 ** 9 : 'N/A'} SOL on fees to send {' '}
           {transactionCount !== null ? transactionCount : 'N/A'} transactions.
         </p>
         {solanaPrice !== null && (
-          <p>Total fees in USD: ${(totalFees !== null ? totalFees / 10 ** 9 * solanaPrice : 0).toFixed(9)}</p>
+          <p>Right now, that is worth ${(totalFees !== null ? totalFees / 10 ** 9 * solanaPrice : 0).toFixed(9)}</p>
         )}
         {ethGasPrice && (
           <p>
@@ -91,7 +94,8 @@ useEffect(() => {
         )}
         {ethGasPrice && solanaPrice !== null && ethPrice !== null && (
           <p>
-            Estimated cost in USD on ETH: $
+            Sending {' '}
+          {transactionCount !== null ? transactionCount : 'N/A'} transactions on ETH mainnet currently costs $
             {transactionCount !== null && ethGasPrice !== null
               ? ((transactionCount * ethGasPrice * 10 ** -9) * ethPrice).toFixed(9)
               : 'N/A'}
@@ -99,13 +103,14 @@ useEffect(() => {
         )}
         {ethGasPaid !== null && solGasPaid !== null && (
           <p>
-            ETH USD Gas paid - SOL USD Gas paid: ${gasDifference !== null ? gasDifference.toFixed(9) : 'N/A'}
+            This wallet has saved ${gasDifference !== null ? gasDifference.toFixed(9) : 'N/A'} by using Solana
           </p>
         )}
           <div className='buttons'>
             <button onClick={() => (window.location.href = '/')}>Reset</button>
           </div>
       </div>
+    </div>
     </div>
   );
 };

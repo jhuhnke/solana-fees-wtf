@@ -7,13 +7,13 @@ export async function fetchEthGasPrice() {
     const ethGasResponse = await axios.get(ethGasApiUrl);
     //const ethGasLimitResponse = await axios.get(ethGasLimitApiUrl);
 
-    const { ProposeGasPrice, suggestBaseFee } = ethGasResponse.data.result;
+    const { ProposeGasPrice, suggestBaseFee} = ethGasResponse.data.result;
     //const { GasLimit } = ethGasLimitResponse.data.result; 
     
     // Calculate the ETH transaction fee
     const ethTransactionFee = (parseFloat(ProposeGasPrice) + parseFloat(suggestBaseFee)) * 80000;
     
-    return ethTransactionFee;
+    return ethTransactionFee
   } catch (error) {
     console.error('Error fetching ETH gas price:', error);
     throw error;

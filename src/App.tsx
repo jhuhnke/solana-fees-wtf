@@ -9,9 +9,10 @@ import ResultScreen from './components/ResultScreen'
 import { fetchEthGasPrice } from './queries/get-eth-gas'; // Import your function to fetch ethGasPrice
 
 const App = () => {
-  const [totalFees, setTotalFees] = useState<number | null>(null);
-  const [transactionCount, setTransactionCount] = useState<number | null>(null);
+  const [totalFees] = useState<number | null>(null);
+  const [transactionCount] = useState<number | null>(null);
   const [ethGasPrice, setEthGasPrice] = useState<number | null>(null);
+  const [walletAddress] = useState<string>('');
 
   useEffect(() => {
     // Fetch ethGasPrice here and set it using setEthGasPrice
@@ -24,10 +25,9 @@ const App = () => {
       }
     };
 
-    // Call your functions to fetch totalFees and transactionCount
+  
     const fetchTotalFeesAndTransactionCount = async () => {
-      // Fetch totalFees and transactionCount here
-      // Call setTotalFees and setTransactionCount with fetched values
+     
     };
 
     fetchEthGas();
@@ -44,10 +44,11 @@ const App = () => {
             totalFees={totalFees} 
             transactionCount={transactionCount}
             ethGasPrice={ethGasPrice} 
-          /> {/* Use the ResultScreen component */}
+            walletAddress={walletAddress}
+          /> 
         </Route>
         <Route exact path="/">
-          <Home /> {/* Use the Home component */}
+          <Home /> 
         </Route>
         <Redirect to="/" />
       </Switch>

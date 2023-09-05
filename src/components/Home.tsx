@@ -9,6 +9,7 @@ const Home = () => {
   const [totalFees, setTotalFees] = useState<number | null>(null);
   const [transactionCount, setTransactionCount] = useState<number | null>(null);
   const [ethGasPrice, setEthGasPrice] = useState<number | null>(null);
+  const [walletAddress, setWalletAddress] = useState<string>('');
 
   const handleGetTotalFees = async (walletAddress: string) => {
   setIsLoading(true);
@@ -18,6 +19,7 @@ const Home = () => {
     setTotalFees(totalFees);
     setTransactionCount(transactionCount);
     setEthGasPrice(ethGasPrice);
+    setWalletAddress(walletAddress);
   } catch (error) {
     console.error('Error:', error);
   } finally {
@@ -30,7 +32,12 @@ const Home = () => {
   }
 
   if (totalFees !== null) {
-    return <ResultScreen totalFees={totalFees} transactionCount = {transactionCount} ethGasPrice={ethGasPrice} />;
+    return <ResultScreen 
+              totalFees={totalFees} 
+              transactionCount = {transactionCount} 
+              ethGasPrice={ethGasPrice} 
+              walletAddress={walletAddress}
+            />;
   }
 
   return (
