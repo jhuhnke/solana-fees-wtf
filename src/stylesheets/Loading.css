@@ -1,7 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  background-color: #F3F3F3;
+}
+
 .loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #F3F3F3;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 2rem;
+  font-weight: bold;
+  animation: flash 1s infinite alternate;
+}
+
+.loading-message {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #888;
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0;
   }
+
+  100% {
+    opacity: 1;
+  }
+}
