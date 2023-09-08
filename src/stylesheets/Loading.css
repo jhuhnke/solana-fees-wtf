@@ -10,6 +10,11 @@
   text-align: center;
 }
 
+.dancing-pepe {
+  max-height: 35vh;
+  /* Limit the height to 35% of the container height */
+}
+
 .loading-text {
   font-size: 2rem;
   font-weight: bold;

@@ -15,6 +15,9 @@ const LoadingScreen = () => {
   return (
     <div className='container'>
       <div className='loading'>
+        <div className='dancing-pepe'>
+          <img src='/peepo-nervous.gif' alt='Dancing Pepe' />
+        </div>
         <h2 className='loading-text'>Loading...</h2>
         {showMessage && <div className='loading-message'>Please be patient, the blockchain is chunky</div>}
       </div>
