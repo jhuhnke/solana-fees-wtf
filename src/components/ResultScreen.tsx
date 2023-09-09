@@ -77,33 +77,33 @@ useEffect(() => {
       <div className="center">
       <div>
         <p>
-          <a href= {`https://solscan.io/account/${walletAddress}`} target="_blank" rel="noopener noreferrer"> {walletAddress}</a> has spent {totalFees !== null ? totalFees / 10 ** 9 : 'N/A'} SOL on fees to send {' '}
-          {transactionCount !== null ? transactionCount : 'N/A'} transactions.
+          <a href= {`https://solscan.io/account/${walletAddress}`} target="_blank" rel="noopener noreferrer"> {`${walletAddress.slice(0, 4)}...${walletAddress.slice(-4)}`}</a> has spent <span className='output'>{totalFees !== null ? (totalFees / 10 ** 9).toFixed(4) : 'N/A'}</span> SOL on fees to send <span className='output'>{' '}{transactionCount !== null ? transactionCount : 'N/A'} </span>transactions.
         </p>
         {solanaPrice !== null && (
-          <p>Right now, that is worth ${(totalFees !== null ? totalFees / 10 ** 9 * solanaPrice : 0).toFixed(9)}</p>
+          <p>Right now, that is worth <span className='output'>${(totalFees !== null ? totalFees / 10 ** 9 * solanaPrice : 0).toFixed(4)}</span></p>
         )}
         {ethGasPrice && (
           <p>
-            Estimated cost in ETH:{' '}
+            Estimated cost in ETH:
+            <span className='output'>{' '}
             {transactionCount !== null && ethGasPrice !== null
-              ? (transactionCount * ethGasPrice).toFixed(9)
-              : 'N/A'}{' '}
+              ? (transactionCount * ethGasPrice).toFixed(4)
+              : 'N/A'}{' '}</span>
             GWEI
           </p>
         )}
         {ethGasPrice && solanaPrice !== null && ethPrice !== null && (
           <p>
-            Sending {' '}
-          {transactionCount !== null ? transactionCount : 'N/A'} transactions on ETH mainnet currently costs $
+          Sending <span className='output'>{' '}
+          {transactionCount !== null ? transactionCount : 'N/A'}</span> transactions on ETH mainnet currently costs <span className='output'>$
             {transactionCount !== null && ethGasPrice !== null
-              ? ((transactionCount * ethGasPrice * 10 ** -9) * ethPrice).toFixed(9)
-              : 'N/A'}
+              ? ((transactionCount * ethGasPrice * 10 ** -9) * ethPrice).toFixed(2)
+              : 'N/A'} </span>
           </p>
         )}
         {ethGasPaid !== null && solGasPaid !== null && (
           <p>
-            This wallet has saved ${gasDifference !== null ? gasDifference.toFixed(9) : 'N/A'} by using Solana
+            This wallet has saved <span className='output'>${gasDifference !== null ? gasDifference.toFixed(2) : 'N/A'}</span> by using Solana
           </p>
         )}
           <div className='buttons'>

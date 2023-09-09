@@ -2,12 +2,63 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     height: 100vh;
     background-color: #F3F3F3;
     /* Adjust this to the desired height */
 }
 
+.output {
+    font-weight: bold;
+    background: -webkit-linear-gradient(-45deg,
+        #9945FF,
+        #14F195); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
+
 .buttons {
     margin-top: 1rem;
     justify-content: center;
+}
+
+button {
+    font-size: 1.5rem;
+    padding: 1rem 2rem;
+    background-color: #9945FF;
+    color: #F3F3F3;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #14F195;
+}
+
+p {
+    font-size: 1.5rem;
+}
+
+a {
+    color: #333;
+    transition: color 0.3s;
+}
+
+/* Change the text color on hover */
+a:hover {
+    background: -webkit-linear-gradient(-45deg,
+                #9945FF,
+                #14F195);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+}
+
+@media (min-width: 768px) {
+    .center {
+        font-size: 1.75rem;
+        /* Adjust font size for larger screens */
+    }
 }
