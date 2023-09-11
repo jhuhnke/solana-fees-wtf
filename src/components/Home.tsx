@@ -3,6 +3,9 @@ import { getTotalFeesPaid } from '../queries/get-fees';
 import LoadingScreen from './Loading';
 import ResultScreen from './ResultScreen';
 import WalletConnect from './WalletConnect';
+import '../stylesheets/Home.css'
+
+//require('@solana/wallet-adapter-react-ui/styles.css');
 
 const Home: FC = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -59,7 +62,9 @@ const Home: FC = () => {
         <div className="container">
             <div className="form">
                 <h1>How much have you spent on fees?</h1>
-                <WalletConnect onWalletConnected={handleWalletConnected} />
+                <div className='wallet-connect-buttons'>
+                    <WalletConnect onWalletConnected={handleWalletConnected} />
+                </div>
                 <h2>OR</h2>
                 <h2>Enter A Solana Address</h2>
                 <form onSubmit={handleSubmit}>
