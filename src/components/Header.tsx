@@ -1,22 +1,27 @@
-import React from 'react'; 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons';
-import '../stylesheets/Header.css'
+import React, { useState } from 'react';
+import '../stylesheets/Header.css';
 
 const Header = () => {
-    return (
-        <header className="header">
-            <h1 className="title">F(R)EE</h1>
-            <div className='social-icons'>
-                <a href="https://twitter.com/web3-analyst">
-                    <FontAwesomeIcon icon={faTwitter} size="2x" />
-                </a>
-                <a href="https://github.com/jhuhnke">
-                <FontAwesomeIcon icon={faGithub} size="2x" />
-                </a>
-            </div>
-        </header>
-    ); 
-}; 
+  // State to control the visibility of the menu
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-export default Header; 
+  // Function to toggle the menu
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  return (
+    <header className="header">
+      <h1 className="title">F(R)EE</h1>
+      <div className={`menu-icon ${isMenuOpen ? 'active' : ''}`} onClick={toggleMenu}>
+        ☰
+      </div>
+      <ul className={`menu ${isMenuOpen ? 'active' : ''}`}>
+        <li><a href="/">Home</a></li>
+        <li><a href="/">More Soon</a></li>
+      </ul>
+    </header>
+  );
+};
+
+export default Header;

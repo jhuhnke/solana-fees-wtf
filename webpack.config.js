@@ -1,4 +1,5 @@
 const path = require('path'); 
+const webpack = require('webpack');
 
 module.exports = {
     resolve: {
@@ -9,6 +10,8 @@ module.exports = {
         https: require.resolve('https-browserify'),
         zlib: require.resolve('browserify-zlib'),
         url: require.resolve('url/'),
+        path: require.resolve('path-browserify'),
+        os: require.resolve('os-browserify/browser'),
     },
 },
 }; 

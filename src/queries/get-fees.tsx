@@ -1,5 +1,5 @@
 import { Connection, PublicKey } from '@solana/web3.js';
-import { fetchEthGasPrice } from './get-eth-gas'; // Import the function from the new file
+import { fetchEthGasPrice } from './get-eth-gas'; 
 
 const rpcEndpoint = 'https://rpc.helius.xyz/?api-key=2cc4df26-0576-4fb8-ac07-09b40e812657';
 

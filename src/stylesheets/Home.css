@@ -3,12 +3,11 @@
 .wallet-adapter-button {
     background-color: transparent;
     border: none;
-    color: #fff;
+    color: #F3F3F3;
     cursor: pointer;
     display: flex;
     align-items: center;
-    font-family: 'DM Sans', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 1.25rem;
     font-weight: 600;
     height: 48px;
     line-height: 48px;
@@ -29,7 +28,7 @@
 }
 
 .wallet-adapter-button:not([disabled]):focus-visible {
-    outline-color: white;
+    outline-color: #F3F3F3;
 }
 
 .wallet-adapter-button:not([disabled]):hover {
@@ -113,7 +112,7 @@
     font-size: 14px;
     font-weight: 600;
     height: 37px;
-    color: #fff;
+    color: #F3F3F3;
 }
 
 .wallet-adapter-dropdown-list-item:not([disabled]):hover {
@@ -162,7 +161,7 @@
 }
 
 .wallet-adapter-modal-button-close:focus-visible {
-    outline-color: white;
+    outline-color: #F3F3F3;
 }
 
 .wallet-adapter-modal-button-close svg {
@@ -171,7 +170,7 @@
 }
 
 .wallet-adapter-modal-button-close:hover svg {
-    fill: #fff;
+    fill: #F3F3F3;
 }
 
 .wallet-adapter-modal-overlay {
@@ -226,7 +225,7 @@
     margin: 0;
     padding: 64px 48px 48px 48px;
     text-align: center;
-    color: #fff;
+    color: #F3F3F3;
 }
 
 @media (max-width: 374px) {
@@ -270,7 +269,7 @@
     display: flex;
     align-items: center;
     background-color: transparent;
-    color: #fff;
+    color: #F3F3F3;
 }
 
 .wallet-adapter-modal-list-more svg {
@@ -302,7 +301,7 @@
     font-size: 18px;
     border: none;
     border-radius: 8px;
-    color: #fff;
+    color: #F3F3F3;
 }
 
 .container {
@@ -325,6 +324,7 @@
     flex-direction: column;
     margin-top: 1rem;
     justify-content: center;
+    font-weight: 600;
 }
 
 button {
@@ -339,8 +339,23 @@ button {
     transition: background-color 0.3s;
     width: 100%; 
     margin-bottom: 1rem;
+    font-weight: 600;
 }
 
 button:hover {
     background-color: #14F195;
+}
+
+.social-icons {
+    margin-left: 2%;
+    gap: 10px;
+}
+
+.social-icons a {
+    color: #404144;
+    text-decoration: none;
+}
+
+.social-icons a:hover {
+    color: #666;
 }

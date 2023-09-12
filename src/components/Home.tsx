@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react';
 import { getTotalFeesPaid } from '../queries/get-fees';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitter, faGithub } from '@fortawesome/free-brands-svg-icons';
 import LoadingScreen from './Loading';
 import ResultScreen from './ResultScreen';
 import WalletConnect from './WalletConnect';
@@ -88,6 +90,14 @@ const Home: FC = () => {
                         </button>
                     </div>
                 </form>
+            </div>
+            <div className='social-icons'>
+                <a href="https://twitter.com/web3-analyst">
+                    <FontAwesomeIcon icon={faTwitter} size="2x" />
+                </a>
+                <a href="https://github.com/jhuhnke">
+                <FontAwesomeIcon icon={faGithub} size="2x" />
+                </a>
             </div>
         </div>
     );

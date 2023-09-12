@@ -25,8 +25,6 @@ const App = () => {
       }
     };
 
-    // Fetch total fees and transaction count here
-
     fetchEthGas();
   }, []);
 

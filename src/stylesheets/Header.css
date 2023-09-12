@@ -2,8 +2,11 @@ header.header {
   position: fixed;
   top: 0;
   left: 0;
-  width: 98%;
+  width: 100%;
+  /* Adjust the width to fit your design */
   display: flex;
+  justify-content: space-between;
+  /* Place elements at the ends */
   align-items: center;
   padding: 1rem;
   background-color: transparent;
@@ -12,21 +15,55 @@ header.header {
 }
 
 .title {
-  margin-right: 2%;
-  font-size: 1.5rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 2.5rem;
   flex-grow: 1;
 }
 
-.social-icons {
-  margin-left: 2%;
-  gap: 10px;
+.menu-icon {
+  margin-right: 3%;
+  cursor: pointer;
+  font-size: 24px;
+  /* Add any additional styles for the menu icon here */
 }
 
-.social-icons a {
+.menu {
+  margin-right: 5%;
+  list-style: none;
+  padding: 0;
+  display: none;
   color: black;
-  text-decoration: none; 
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.social-icons a:hover {
-  color: #666;
+.menu.active {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  /* Position menu below the header */
+  right: 0;
+  /* Align menu to the right */
+  background-color: #F3F3F3;
+  /* Menu background color */
+  /* Add other styles for the active menu here */
+}
+
+.menu li {
+  padding: 8px;
+  text-align: center;
+  /* Add other styles for menu items here */
+}
+
+/* Style for links inside the menu */
+.menu a {
+  color: black;
+  text-decoration: none;
+}
+
+/* Show the menu when it's active */
+.menu.active {
+  display: flex;
 }
