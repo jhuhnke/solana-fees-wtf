@@ -3,9 +3,7 @@ import { getTotalFeesPaid } from '../queries/get-fees';
 import LoadingScreen from './Loading';
 import ResultScreen from './ResultScreen';
 import WalletConnect from './WalletConnect';
-import '../stylesheets/Home.css'
-
-//require('@solana/wallet-adapter-react-ui/styles.css');
+import '../stylesheets/Home.css';
 
 const Home: FC = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -13,6 +11,7 @@ const Home: FC = () => {
     const [transactionCount, setTransactionCount] = useState<number | null>(null);
     const [ethGasPrice, setEthGasPrice] = useState<number | null>(null);
     const [walletAddress, setWalletAddress] = useState<string | null>(null); // Use null instead of an empty string
+    const [isWalletConnected, setIsWalletConnected] = useState(false); // Track wallet connection
 
     const handleGetTotalFees = async (address: string) => {
         setIsLoading(true);
@@ -23,8 +22,10 @@ const Home: FC = () => {
             setTransactionCount(transactionCount);
             setEthGasPrice(ethGasPrice);
             setWalletAddress(address);
+            setIsWalletConnected(true); // Set wallet connected to true
         } catch (error) {
             console.error('Error:', error);
+            setIsWalletConnected(false); // Set wallet connected to false on error
         } finally {
             setIsLoading(false);
         }
@@ -33,11 +34,18 @@ const Home: FC = () => {
     // Callback function to update walletAddress when the wallet is connected
     const handleWalletConnected = (address: string) => {
         setWalletAddress(address);
+        setIsWalletConnected(true); // Set wallet connected to true
+    };
+
+    // Callback function to handle disconnecting the wallet
+    const handleDisconnect = () => {
+        setWalletAddress(null); // Clear the wallet address
+        setIsWalletConnected(false); // Set wallet connected to false
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+
         if (walletAddress) {
             handleGetTotalFees(walletAddress);
         }
@@ -62,15 +70,22 @@ const Home: FC = () => {
         <div className="container">
             <div className="form">
                 <h1>How much have you spent on fees?</h1>
-                <div className='wallet-connect-buttons'>
-                    <WalletConnect onWalletConnected={handleWalletConnected} />
+                <h2>First Connect Your Solana Wallet</h2>
+                <div className='button wallet-connect-buttons'>
+                    {isWalletConnected ? (
+                        <button className="button disconnect-button" onClick={handleDisconnect}>
+                            Disconnect
+                        </button>
+                    ) : (
+                        <WalletConnect onWalletConnected={handleWalletConnected} />
+                    )}
                 </div>
-                <h2>OR</h2>
-                <h2>Enter A Solana Address</h2>
+                <h2>Hit Submit To Start Fee Calculation</h2>
                 <form onSubmit={handleSubmit}>
-                    <input type="text" name="walletAddress" placeholder="Enter a wallet address" />
                     <div className="buttons">
-                        <button type="submit">Submit</button>
+                        <button className="button submit-button" type="submit">
+                            Submit
+                        </button>
                     </div>
                 </form>
             </div>

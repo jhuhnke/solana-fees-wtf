@@ -6,9 +6,6 @@ import '../stylesheets/Header.css'
 const Header = () => {
     return (
         <header className="header">
-            <div className='logo'>
-                <img src={process.env.PUBLIC_URL + '/pepe.jpg'} alt="pepe"></img>
-            </div>
             <h1 className="title">F(R)EE</h1>
             <div className='social-icons'>
                 <a href="https://twitter.com/web3-analyst">

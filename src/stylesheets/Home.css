@@ -321,6 +321,8 @@
 }
 
 .buttons {
+    display: flex; 
+    flex-direction: column;
     margin-top: 1rem;
     justify-content: center;
 }
@@ -335,6 +337,8 @@ button {
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s;
+    width: 100%; 
+    margin-bottom: 1rem;
 }
 
 button:hover {
