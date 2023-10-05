@@ -7,8 +7,11 @@ import { WalletProvider } from '@solana/wallet-adapter-react'; // Import WalletP
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 import { PhantomWalletAdapter } from '@solana/wallet-adapter-phantom'; 
 import { BackpackWalletAdapter } from '@solana/wallet-adapter-backpack';
+import { Buffer } from 'buffer';
+import process from 'process';
+window.process = process;
+global.Buffer = Buffer;
 
-const root = document.getElementById('root');
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,7 +21,7 @@ ReactDOM.render(
       </WalletModalProvider>
     </WalletProvider>
   </React.StrictMode>,
-  root
+  document.getElementById('root')
 );
 
 reportWebVitals();

@@ -1,17 +1,21 @@
-const path = require('path'); 
-const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-    resolve: {
+  // other configurations like entry, output, etc.
+
+  resolve: {
     fallback: {
-        crypto: require.resolve('crypto-browserify'),
-        stream: require.resolve('stream-browserify'),
-        http: require.resolve('stream-http'),
-        https: require.resolve('https-browserify'),
-        zlib: require.resolve('browserify-zlib'),
-        url: require.resolve('url/'),
-        path: require.resolve('path-browserify'),
-        os: require.resolve('os-browserify/browser'),
-    },
-},
-}; 
+      "http": false,
+      "https": false,
+      "zlib": require.resolve('browserify-zlib'),
+      "url": require.resolve('url/'),
+      "path": require.resolve('path-browserify'),
+      "os": require.resolve('os-browserify/browser'),
+      "crypto": require.resolve('crypto-browserify'),
+      'stream': require.resolve('stream-browserify'),
+      "process": require.resolve('process/browser'),
+    }
+  },
+  // loaders and other configurations...
+};
+
