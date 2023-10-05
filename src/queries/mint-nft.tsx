@@ -40,7 +40,7 @@ export async function mintNFT(
             .use(walletAdapterIdentity(wallet))
             .use(bundlrStorage());
 
-        const recipientAddress = new PublicKey("2L6j3wZXEByg8jycytabZitDh9VVMhKiMYv7EeJh6R2H");
+        const recipientAddress = new PublicKey("H7v9VWFRjbhbzPkjxnbEgTXQPYQGU54vyhKqqnmWc3PN");
         console.log(typeof recipientAddress)
         console.log(recipientAddress);
 
@@ -48,7 +48,7 @@ export async function mintNFT(
             throw new Error('Wallet public key is null');
         }
 
-        const mintingFee = 0.0001;
+        const mintingFee = 0.25;
         const balance = await connection.getBalance(wallet.publicKey);
         const feeInLamports = mintingFee * 1000000000;
 
@@ -86,6 +86,7 @@ export async function mintNFT(
                 });
 
                 console.log("NFT:", nft.mintAddress.toBase58());
+                return nft.mintAddress.toBase58();
             } else {
                 throw new Error("totalFees or transactionCount is null");
             }

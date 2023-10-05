@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import html2canvas from 'html2canvas';
 import axios from 'axios';
 import '../stylesheets/ResultScreen.css';
+import MintSuccess from './MintSuccess';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { mintNFT } from '../queries/mint-nft'; // Make sure the path is correct
 
@@ -24,6 +25,8 @@ const ResultScreen: React.FC<ResultScreenProps> = ({
   const [solGasPaid, setSolGasPaid] = useState<number | null>(null);
   const [gasDifference, setGasDifference] = useState<number | null>(null);
   const [isMinting, setIsMinting] = useState(false);
+  const [mintSuccess, setMintSuccess] = useState(false);
+  const [mintAddress, setMintAddress] = useState<string | null>(null);
 
   // Use the wallet from the useWallet hook
   const { wallet } = useWallet();
@@ -97,14 +100,20 @@ const handleMintNFT = async () => {
       setCapturedImageDataUrl(imgDataUrl);
 
       // Adjusted the function call here to match the helper function's parameter requirements
-      await mintNFT(imgDataUrl, totalFees, transactionCount, wallet?.adapter ?? null);
-      console.log('NFT Minted Successfully!'); // Handle success as you see fit
+      const newMintAddress = await mintNFT(imgDataUrl, totalFees, transactionCount, wallet?.adapter ?? null);
+      console.log('NFT Minted Successfully!', newMintAddress); 
+      setMintAddress(newMintAddress);
+      setMintSuccess(true); // Handle success as you see fit
     } catch (error) {
       console.error('Error:', error); // Handle the error, perhaps by showing an error message to the user.
     } finally {
       setIsMinting(false);
     }
   };
+
+   if (mintSuccess && mintAddress) {
+    return <MintSuccess mintAddress={mintAddress} />;
+  }
 
   return (
     <div className="container" id="result-screen">
@@ -167,7 +176,7 @@ const handleMintNFT = async () => {
           <div className="buttons">
             <button onClick={() => (window.location.href = '/')}>Reset</button>
             <button onClick={handleMintNFT} disabled={isMinting}>
-              {isMinting ? 'Minting...' : 'Mint NFT'}
+              {isMinting ? 'Minting...' : 'Mint NFT (0.25 SOL)'}
             </button>
           </div>
         </div>
